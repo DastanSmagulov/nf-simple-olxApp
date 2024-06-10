@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Footer from "../components/layout/Footer";
+import { QueryClient } from "@tanstack/react-query";
+import ReactQueryProvider from "../components/ReactQueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,9 +17,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const queryClient = new QueryClient();
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <Footer />
+      </body>
     </html>
   );
 }
